@@ -1,12 +1,20 @@
 import React from 'react';
+import { todo } from '../../types/todo';
 import Todo from '../Todo/Todo';
 
-const TodoList = () => {
+type Props = {
+  todoList: todo[];
+};
+
+const TodoList = ({ todoList }: Props) => {
   return (
     <>
       <div>TodoList</div>
-      <Todo />
-      <Todo />
+      <ul>
+        {todoList.map((todo) => (
+          <Todo key={todo.id} todo={todo} />
+        ))}
+      </ul>
     </>
   );
 };
