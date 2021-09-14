@@ -1,4 +1,10 @@
 import React from 'react';
+import { useAppDispatch } from '../../app/hooks';
+import {
+  deleteAllTodoAsync,
+  fetchTodoListAsync,
+  updateAllTodoAsync,
+} from '../../features/todo/todoSlice';
 import { todo } from '../../types/todo';
 
 type Props = {
@@ -6,9 +12,22 @@ type Props = {
 };
 
 const TodoSummary = ({ todoList }: Props) => {
-  const handleChangeCheckbox = () => {};
+  const dispatch = useAppDispatch();
 
-  const handleClickDeleteAll = () => {};
+  const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isCompleted = e.currentTarget.checked;
+    const updateTodoList = todoList
+      .filter((todo) => todo.isCompleted !== isCompleted)
+      .map((todo) => ({ ...todo, isCompleted }));
+    dispatch(updateAllTodoAsync({ todoList: updateTodoList }));
+    dispatch(fetchTodoListAsync());
+  };
+
+  const handleClickDeleteAll = () => {
+    const completedTodoList = todoList.filter((todo) => todo.isCompleted);
+    dispatch(deleteAllTodoAsync({ todoList: completedTodoList }));
+    dispatch(fetchTodoListAsync());
+  };
 
   return (
     <>
@@ -18,7 +37,7 @@ const TodoSummary = ({ todoList }: Props) => {
           id="toggleStatus"
           onChange={handleChangeCheckbox}
           disabled={todoList.length === 0}
-          checked={todoList.every((todo) => todo.isCompleted)}
+          checked={todoList.every((todo) => todo.isCompleted) && todoList.length > 0}
         />
         <label htmlFor="toggleStatus">Toggle Completed Status To All Todo</label>
       </div>

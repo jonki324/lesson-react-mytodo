@@ -1,7 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { todo, todoFilter } from '../../types/todo';
-import { fetchTodoList } from './todoAPI';
+import {
+  fetchTodoList,
+  createTodo,
+  deleteTodo,
+  updateTodo,
+  deleteAllTodo,
+  updateAllTodo,
+} from './todoAPI';
 
 export interface TodoState {
   todoList: todo[];
@@ -18,6 +25,37 @@ export const fetchTodoListAsync = createAsyncThunk('todo/fetchTodoList', async (
   return response.data;
 });
 
+export const createTodoAsync = createAsyncThunk('todo/createTodo', async (todo: Partial<todo>) => {
+  const response = await createTodo(todo);
+  return response.data;
+});
+
+export const deleteTodoAsync = createAsyncThunk('todo/deleteTodo', async (todo: todo) => {
+  const response = await deleteTodo(todo);
+  return response.data;
+});
+
+export const updateTodoAsync = createAsyncThunk('todo/updateTodo', async (todo: todo) => {
+  const response = await updateTodo(todo);
+  return response.data;
+});
+
+export const deleteAllTodoAsync = createAsyncThunk(
+  'todo/deleteAllTodo',
+  async (todoList: { todoList: todo[] }) => {
+    const response = await deleteAllTodo(todoList);
+    return response.data;
+  }
+);
+
+export const updateAllTodoAsync = createAsyncThunk(
+  'todo/updateAllTodo',
+  async (todoList: { todoList: todo[] }) => {
+    const response = await updateAllTodo(todoList);
+    return response.data;
+  }
+);
+
 export const todoSlice = createSlice({
   name: 'todo',
   initialState,
@@ -33,6 +71,14 @@ export const todoSlice = createSlice({
       })
       .addCase(fetchTodoListAsync.fulfilled, (state, action) => {
         state.todoList = action.payload;
+      })
+      .addCase(createTodoAsync.fulfilled, (state, action) => {
+        state.todoList.push(action.payload);
+      })
+      .addCase(updateTodoAsync.fulfilled, (state, action) => {
+        state.todoList = state.todoList.map((todo) =>
+          todo.id === action.payload.id ? action.payload : todo
+        );
       });
   },
 });

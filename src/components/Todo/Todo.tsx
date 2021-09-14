@@ -1,4 +1,10 @@
 import React from 'react';
+import { useAppDispatch } from '../../app/hooks';
+import {
+  deleteTodoAsync,
+  fetchTodoListAsync,
+  updateTodoAsync,
+} from '../../features/todo/todoSlice';
 import { todo } from '../../types/todo';
 
 type Props = {
@@ -6,11 +12,18 @@ type Props = {
 };
 
 const Todo = ({ todo }: Props) => {
+  const dispatch = useAppDispatch();
+
   const checkboxId = `todo-${todo.id}`;
 
-  const handleChangeCheckbox = () => {};
+  const handleChangeCheckbox = () => {
+    dispatch(updateTodoAsync({ ...todo, isCompleted: !todo.isCompleted }));
+  };
 
-  const handleClickDelete = () => {};
+  const handleClickDelete = () => {
+    dispatch(deleteTodoAsync(todo));
+    dispatch(fetchTodoListAsync());
+  };
 
   return (
     <>
