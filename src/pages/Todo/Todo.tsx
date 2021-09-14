@@ -3,13 +3,12 @@ import TodoFilter from '../../components/TodoFilter/TodoFilter';
 import TodoForm from '../../components/TodoForm/TodoForm';
 import TodoList from '../../components/TodoList/TodoList';
 import TodoSummary from '../../components/TodoSummary/TodoSummary';
-import { todo, todoFilter } from '../../types/todo';
+import { todo } from '../../types/todo';
+import { useAppSelector } from '../../app/hooks';
+import { selectTodoFilter } from '../../features/todo/todoSlice';
 
 const Todo = () => {
-  const todoFilter: todoFilter = {
-    word: '',
-    removeCompleted: false,
-  };
+  const todoFilter = useAppSelector(selectTodoFilter);
 
   const todoList: todo[] = [
     {
