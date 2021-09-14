@@ -1,32 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TodoFilter from '../../components/TodoFilter/TodoFilter';
 import TodoForm from '../../components/TodoForm/TodoForm';
 import TodoList from '../../components/TodoList/TodoList';
 import TodoSummary from '../../components/TodoSummary/TodoSummary';
-import { todo } from '../../types/todo';
-import { useAppSelector } from '../../app/hooks';
-import { selectTodoFilter } from '../../features/todo/todoSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import {
+  selectTodoFilter,
+  fetchTodoListAsync,
+  selectTodoList,
+} from '../../features/todo/todoSlice';
 
 const Todo = () => {
+  const dispatch = useAppDispatch();
   const todoFilter = useAppSelector(selectTodoFilter);
+  const todoList = useAppSelector(selectTodoList);
 
-  const todoList: todo[] = [
-    {
-      id: 1,
-      body: 'todo1',
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      body: 'todo2',
-      isCompleted: true,
-    },
-    {
-      id: 3,
-      body: 'todo3',
-      isCompleted: false,
-    },
-  ];
+  useEffect(() => {
+    dispatch(fetchTodoListAsync());
+  }, [dispatch]);
 
   return (
     <>
