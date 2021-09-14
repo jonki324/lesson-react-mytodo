@@ -33,7 +33,7 @@ const Todo = () => {
     <>
       <h2>Todo List Page</h2>
       <TodoFilter filter={todoFilter} />
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} filter={todoFilter} />
       <TodoForm />
       <TodoSummary todoList={todoList} />
     </>
