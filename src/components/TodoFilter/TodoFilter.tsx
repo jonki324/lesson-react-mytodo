@@ -1,17 +1,17 @@
 import React from 'react';
-import { todoFilter } from '../../types/todo';
+import { TodoFilterModel } from '../../types/todo';
 import { useAppDispatch } from '../../app/hooks';
 import { filterByTodo } from '../../features/todo/todoSlice';
 
 type Props = {
-  filter: todoFilter;
+  filter: TodoFilterModel;
 };
 
 const TodoFilter = ({ filter }: Props) => {
   const dispatch = useAppDispatch();
 
   const handleChangeText = (e: React.FormEvent<HTMLInputElement>) => {
-    const payload: todoFilter = {
+    const payload: TodoFilterModel = {
       word: e.currentTarget.value,
       removeCompleted: filter.removeCompleted,
     };
@@ -19,7 +19,7 @@ const TodoFilter = ({ filter }: Props) => {
   };
 
   const handleChangeCheckbox = () => {
-    const payload: todoFilter = {
+    const payload: TodoFilterModel = {
       word: filter.word,
       removeCompleted: !filter.removeCompleted,
     };

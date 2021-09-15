@@ -1,8 +1,8 @@
 import React from 'react';
-import { user } from '../../types/user';
+import { UserModel } from '../../types/user';
 
 type Props = {
-  user: Partial<user>;
+  user: Partial<UserModel>;
 };
 
 const UserDetail = ({ user }: Props) => {

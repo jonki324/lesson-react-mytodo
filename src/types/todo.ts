@@ -1,10 +1,10 @@
-export type todo = {
+export type TodoModel = {
   id: number;
   body: string;
   isCompleted: boolean;
 };
 
-export type todoFilter = {
+export type TodoFilterModel = {
   word: string;
   removeCompleted: boolean;
 };

@@ -1,9 +1,9 @@
 import React from 'react';
-import { user } from '../../types/user';
+import { UserModel } from '../../types/user';
 import User from '../User/User';
 
 type Props = {
-  userList: user[];
+  userList: UserModel[];
 };
 
 const UserList = ({ userList }: Props) => {

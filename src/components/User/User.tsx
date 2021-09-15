@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { user } from '../../types/user';
+import { UserModel } from '../../types/user';
 
 type Props = {
-  user: user;
+  user: UserModel;
 };
 
 const User = ({ user }: Props) => {

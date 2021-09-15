@@ -1,10 +1,10 @@
 import React from 'react';
-import { todo, todoFilter } from '../../types/todo';
+import { TodoModel, TodoFilterModel } from '../../types/todo';
 import Todo from '../Todo/Todo';
 
 type Props = {
-  todoList: todo[];
-  filter: todoFilter;
+  todoList: TodoModel[];
+  filter: TodoFilterModel;
 };
 
 const TodoList = ({ todoList, filter }: Props) => {

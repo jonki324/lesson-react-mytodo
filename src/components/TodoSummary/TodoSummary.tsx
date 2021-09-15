@@ -5,10 +5,10 @@ import {
   fetchTodoListAsync,
   updateAllTodoAsync,
 } from '../../features/todo/todoSlice';
-import { todo } from '../../types/todo';
+import { TodoModel } from '../../types/todo';
 
 type Props = {
-  todoList: todo[];
+  todoList: TodoModel[];
 };
 
 const TodoSummary = ({ todoList }: Props) => {

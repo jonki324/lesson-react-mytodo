@@ -1,15 +1,15 @@
 import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import UserDetail from '../../components/UserDetail/UserDetail';
-import { role, user } from '../../types/user';
+import { RoleType, UserModel } from '../../types/user';
 
 const Profile = () => {
-  const user: user = {
+  const user: UserModel = {
     id: 1,
     loginId: 'u1',
     password: 'p1',
     name: 'user1 staff',
-    role: role.STTAF,
+    role: RoleType.STTAF,
     token: 'token01',
   };
   return (

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { todo, todoFilter } from '../../types/todo';
+import { TodoModel, TodoFilterModel } from '../../types/todo';
 import {
   fetchTodoList,
   createTodo,
@@ -11,8 +11,8 @@ import {
 } from './todoAPI';
 
 export interface TodoState {
-  todoList: todo[];
-  filter: todoFilter;
+  todoList: TodoModel[];
+  filter: TodoFilterModel;
 }
 
 const initialState: TodoState = {
@@ -25,24 +25,27 @@ export const fetchTodoListAsync = createAsyncThunk('todo/fetchTodoList', async (
   return response.data;
 });
 
-export const createTodoAsync = createAsyncThunk('todo/createTodo', async (todo: Partial<todo>) => {
-  const response = await createTodo(todo);
-  return response.data;
-});
+export const createTodoAsync = createAsyncThunk(
+  'todo/createTodo',
+  async (todo: Partial<TodoModel>) => {
+    const response = await createTodo(todo);
+    return response.data;
+  }
+);
 
-export const deleteTodoAsync = createAsyncThunk('todo/deleteTodo', async (todo: todo) => {
+export const deleteTodoAsync = createAsyncThunk('todo/deleteTodo', async (todo: TodoModel) => {
   const response = await deleteTodo(todo);
   return response.data;
 });
 
-export const updateTodoAsync = createAsyncThunk('todo/updateTodo', async (todo: todo) => {
+export const updateTodoAsync = createAsyncThunk('todo/updateTodo', async (todo: TodoModel) => {
   const response = await updateTodo(todo);
   return response.data;
 });
 
 export const deleteAllTodoAsync = createAsyncThunk(
   'todo/deleteAllTodo',
-  async (todoList: { todoList: todo[] }) => {
+  async (todoList: { todoList: TodoModel[] }) => {
     const response = await deleteAllTodo(todoList);
     return response.data;
   }
@@ -50,7 +53,7 @@ export const deleteAllTodoAsync = createAsyncThunk(
 
 export const updateAllTodoAsync = createAsyncThunk(
   'todo/updateAllTodo',
-  async (todoList: { todoList: todo[] }) => {
+  async (todoList: { todoList: TodoModel[] }) => {
     const response = await updateAllTodo(todoList);
     return response.data;
   }
@@ -60,7 +63,7 @@ export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    filterByTodo: (state, action: PayloadAction<todoFilter>) => {
+    filterByTodo: (state, action: PayloadAction<TodoFilterModel>) => {
       state.filter = action.payload;
     },
   },

@@ -1,13 +1,13 @@
-export enum role {
+export enum RoleType {
   STTAF,
   ADMIN,
 }
 
-export type user = {
+export type UserModel = {
   id: number;
   loginId: string;
   password: string;
   name: string;
-  role: role;
+  role: RoleType;
   token: string;
 };
