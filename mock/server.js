@@ -3,6 +3,7 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults({ noCors: false });
 const todoRouter = jsonServer.router({ '': require('./api/todos') });
+const userRouter = jsonServer.router({ '': require('./api/users') });
 
 server.use(middlewares);
 
@@ -32,6 +33,25 @@ server.route('/api/todos').put((req, res, next) => {
 });
 
 server.use('/api/todos', todoRouter);
+
+server.use('/api/users', userRouter);
+
+server.route('/api/login').post((req, res, next) => {
+  const loginId = req.body.loginId;
+  const password = req.body.password;
+  const user = userRouter.db
+    .get('')
+    .toJSON()
+    .filter((u) => u.loginId === loginId && u.password === password);
+  if (user.length === 1) {
+    res.status(200);
+    res.locals.data = user[0];
+  } else {
+    res.status(401);
+    res.locals.data = {};
+  }
+  next();
+});
 
 server.listen(4000, () => {
   console.log('JSON Server is running');
