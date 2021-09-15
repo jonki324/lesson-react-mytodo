@@ -3,7 +3,7 @@ import Layout from '../../components/Layout/Layout';
 import UserDetail from '../../components/UserDetail/UserDetail';
 import { RoleType, UserModel } from '../../types/user';
 
-const Profile = () => {
+const ProfilePage = () => {
   const user: UserModel = {
     id: 1,
     loginId: 'u1',
@@ -20,4 +20,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

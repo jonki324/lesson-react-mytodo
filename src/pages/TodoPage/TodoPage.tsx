@@ -11,7 +11,7 @@ import {
   selectTodoList,
 } from '../../features/todo/todoSlice';
 
-const Todo = () => {
+const TodoPage = () => {
   const dispatch = useAppDispatch();
   const todoFilter = useAppSelector(selectTodoFilter);
   const todoList = useAppSelector(selectTodoList);
@@ -31,4 +31,4 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+export default TodoPage;

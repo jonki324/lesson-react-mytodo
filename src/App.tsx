@@ -2,29 +2,29 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { Counter } from './pages/Counter/Counter';
-import Profile from './pages/Profile/Profile';
-import Todo from './pages/Todo/Todo';
-import User from './pages/User/User';
-import UserDetailPage from './pages/UserDetail/UserDetail';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import TodoPage from './pages/TodoPage/TodoPage';
+import UserListPage from './pages/UserListPage/UserListPage';
+import UserDetailPage from './pages/UserDetailPage/UserDetailPage';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/todos">
-          <Todo />
+          <TodoPage />
         </Route>
         <Route exact path="/counter">
           <Counter />
         </Route>
         <Route exact path="/users">
-          <User />
+          <UserListPage />
         </Route>
         <Route path="/users/:id">
           <UserDetailPage />
         </Route>
         <Route exact path="/profile">
-          <Profile />
+          <ProfilePage />
         </Route>
       </Switch>
     </BrowserRouter>

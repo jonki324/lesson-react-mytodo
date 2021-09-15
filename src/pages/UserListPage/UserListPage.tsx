@@ -4,7 +4,7 @@ import Layout from '../../components/Layout/Layout';
 import UserList from '../../components/UserList/UserList';
 import { fetchUserListAsync, selectUserList } from '../../features/user/userSlice';
 
-const User = () => {
+const UserListPage = () => {
   const dispatch = useAppDispatch();
 
   const userList = useAppSelector(selectUserList);
@@ -21,4 +21,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserListPage;
