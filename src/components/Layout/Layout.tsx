@@ -22,6 +22,9 @@ const Layout = ({ children }: Props) => {
             <li>
               <Link to="/profile">My Profile Page</Link>
             </li>
+            <li>
+              <Link to="/login">Login Page</Link>
+            </li>
           </ul>
         </nav>
       </header>

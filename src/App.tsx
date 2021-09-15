@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import TodoPage from './pages/TodoPage/TodoPage';
 import UserListPage from './pages/UserListPage/UserListPage';
 import UserDetailPage from './pages/UserDetailPage/UserDetailPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 const App = () => {
   return (
@@ -25,6 +26,9 @@ const App = () => {
         </Route>
         <Route exact path="/profile">
           <ProfilePage />
+        </Route>
+        <Route exact path="/login">
+          <LoginPage />
         </Route>
       </Switch>
     </BrowserRouter>
