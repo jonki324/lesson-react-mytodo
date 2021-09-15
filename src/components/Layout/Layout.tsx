@@ -16,6 +16,12 @@ const Layout = ({ children }: Props) => {
             <li>
               <Link to="/counter">Counter Page</Link>
             </li>
+            <li>
+              <Link to="/users">User List Page</Link>
+            </li>
+            <li>
+              <Link to="/profile">My Profile Page</Link>
+            </li>
           </ul>
         </nav>
       </header>
