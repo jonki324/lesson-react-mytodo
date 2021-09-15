@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { user } from '../../types/user';
+import { UserModel } from '../../types/user';
 import { fetchUserById, fetchUserList, isAuthenticated } from './userAPI';
 
 export interface UserState {
-  userList: user[];
-  selectedUser: Partial<user>;
+  userList: UserModel[];
+  selectedUser: Partial<UserModel>;
   isAuthenticated: boolean;
-  loginUser: Partial<user>;
+  loginUser: Partial<UserModel>;
 }
 
 const initialState: UserState = {
@@ -29,7 +29,7 @@ export const fetchUserListAsync = createAsyncThunk('user/fetchUserList', async (
 
 export const isAuthenticatedAsync = createAsyncThunk(
   'user/isAuthenticated',
-  async (user: Partial<user>) => {
+  async (user: Partial<UserModel>) => {
     const response = await isAuthenticated(user);
     return response.data;
   }
