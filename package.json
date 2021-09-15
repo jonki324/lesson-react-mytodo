@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.9",
     "json-server": "^0.16.3",
     "nodemon": "^2.0.12"
   }
