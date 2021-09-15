@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Layout from '../../components/Layout/Layout';
 import TodoFilter from '../../components/TodoFilter/TodoFilter';
 import TodoForm from '../../components/TodoForm/TodoForm';
 import TodoList from '../../components/TodoList/TodoList';
@@ -20,13 +21,13 @@ const Todo = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <Layout>
       <h2>Todo List Page</h2>
       <TodoFilter filter={todoFilter} />
       <TodoList todoList={todoList} filter={todoFilter} />
       <TodoForm />
       <TodoSummary todoList={todoList} />
-    </>
+    </Layout>
   );
 };
 

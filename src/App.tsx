@@ -1,16 +1,22 @@
 import React from 'react';
-// import { Counter } from './pages/Counter/Counter';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Layout from './components/Layout/Layout';
+import { Counter } from './pages/Counter/Counter';
 import Todo from './pages/Todo/Todo';
 
-function App() {
+const App = () => {
   return (
-    <Layout>
-      <Todo />
-      {/* <Counter /> */}
-    </Layout>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/todos">
+          <Todo />
+        </Route>
+        <Route path="/counter">
+          <Counter />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
