@@ -5,16 +5,16 @@ import { fetchUserById, fetchUserList, isAuthenticated } from './userAPI';
 
 export interface UserState {
   userList: user[];
-  selectedUser: Partial<user> | null;
+  selectedUser: Partial<user>;
   isAuthenticated: boolean;
-  loginUser: Partial<user> | null;
+  loginUser: Partial<user>;
 }
 
 const initialState: UserState = {
   userList: [],
-  selectedUser: null,
+  selectedUser: {},
   isAuthenticated: false,
-  loginUser: null,
+  loginUser: {},
 };
 
 export const fetchUserByIdAsync = createAsyncThunk('user/fetchUserById', async (id: number) => {
