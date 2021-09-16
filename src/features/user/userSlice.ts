@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk, RootState } from '../../app/store';
 import { UserModel } from '../../types/user';
 import { saveToken } from '../core/jwtService';
 import { fetchUserById, fetchUserList, isAuthenticated } from './userAPI';
@@ -39,7 +39,14 @@ export const isAuthenticatedAsync = createAsyncThunk(
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setIsAuthenticated: (state, action: PayloadAction<boolean>) => {
+      state.isAuthenticated = action.payload;
+    },
+    setLoginUser: (state, action: PayloadAction<Partial<UserModel>>) => {
+      state.loginUser = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserByIdAsync.fulfilled, (state, action) => {
@@ -56,9 +63,16 @@ export const userSlice = createSlice({
   },
 });
 
+export const { setIsAuthenticated, setLoginUser } = userSlice.actions;
+
 export const selectUserList = (state: RootState) => state.user.userList;
 export const selectSelectedUser = (state: RootState) => state.user.selectedUser;
 export const selectIsAuthenticated = (state: RootState) => state.user.isAuthenticated;
 export const selectLoginUser = (state: RootState) => state.user.loginUser;
+
+export const fetchLoginUserByStoreUserId = (): AppThunk => (dispatch, getState) => {
+  const id = selectLoginUser(getState()).id || 0;
+  dispatch(fetchUserByIdAsync(id));
+};
 
 export default userSlice.reducer;

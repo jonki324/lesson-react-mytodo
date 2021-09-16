@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Layout from '../../components/Layout/Layout';
 import UserDetail from '../../components/UserDetail/UserDetail';
-import { RoleType, UserModel } from '../../types/user';
+import { fetchLoginUserByStoreUserId, selectSelectedUser } from '../../features/user/userSlice';
 
 const ProfilePage = () => {
-  const user: UserModel = {
-    id: 1,
-    loginId: 'u1',
-    password: 'p1',
-    name: 'user1 staff',
-    role: RoleType.STTAF,
-    token: 'token01',
-  };
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchLoginUserByStoreUserId());
+  }, [dispatch]);
+
+  const user = useAppSelector(selectSelectedUser);
+
   return (
     <Layout>
       <h2>My Profile Page</h2>

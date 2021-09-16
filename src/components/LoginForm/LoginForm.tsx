@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { isAuthenticatedAsync, selectIsAuthenticated } from '../../features/user/userSlice';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
 
+  const location = useLocation<{ from: string | undefined }>().state ?? undefined;
+
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   if (isAuthenticated) {
-    return <Redirect to="/todos" />;
+    return <Redirect to={location?.from ?? '/todos'} />;
   }
 
   const handleClickLogin = () => {
