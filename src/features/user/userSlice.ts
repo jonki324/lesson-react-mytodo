@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { UserModel } from '../../types/user';
+import { saveToken } from '../core/jwtService';
 import { fetchUserById, fetchUserList, isAuthenticated } from './userAPI';
 
 export interface UserState {
@@ -50,6 +51,7 @@ export const userSlice = createSlice({
       .addCase(isAuthenticatedAsync.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.loginUser = action.payload;
+        saveToken(action.payload.token);
       });
   },
 });

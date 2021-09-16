@@ -44,13 +44,10 @@ server.route('/api/login').post((req, res, next) => {
     .toJSON()
     .filter((u) => u.loginId === loginId && u.password === password);
   if (user.length === 1) {
-    res.status(200);
-    res.locals.data = user[0];
+    res.status(200).json(user[0]);
   } else {
-    res.status(401);
-    res.locals.data = {};
+    res.status(401).json({});
   }
-  next();
 });
 
 server.listen(4000, () => {

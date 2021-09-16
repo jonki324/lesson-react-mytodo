@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../app/hooks';
-import { isAuthenticatedAsync } from '../../features/user/userSlice';
+import { Redirect } from 'react-router';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { isAuthenticatedAsync, selectIsAuthenticated } from '../../features/user/userSlice';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
 
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  if (isAuthenticated) {
+    return <Redirect to="/todos" />;
+  }
 
   const handleClickLogin = () => {
     dispatch(isAuthenticatedAsync({ loginId, password }));
@@ -32,7 +38,11 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
       </div>
-      <button type="button" onClick={handleClickLogin}>
+      <button
+        type="button"
+        onClick={handleClickLogin}
+        disabled={loginId.trim() === '' || password.trim() === ''}
+      >
         LOGIN
       </button>
     </>
