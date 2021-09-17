@@ -34,7 +34,7 @@ const LoginForm = () => {
       <div>
         <label htmlFor="password">Password: </label>
         <input
-          type="text"
+          type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
