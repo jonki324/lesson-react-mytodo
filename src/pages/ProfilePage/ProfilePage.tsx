@@ -5,9 +5,11 @@ import UserDetail from '../../components/UserDetail/UserDetail';
 import { fetchLoginUserByStoreUserId, selectSelectedUser } from '../../features/user/userSlice';
 
 const ProfilePage = () => {
+  console.log('profile page');
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log('mounted');
     dispatch(fetchLoginUserByStoreUserId());
   }, [dispatch]);
 

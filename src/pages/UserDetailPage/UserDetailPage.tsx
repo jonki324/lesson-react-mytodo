@@ -6,10 +6,12 @@ import UserDetail from '../../components/UserDetail/UserDetail';
 import { fetchUserByIdAsync, selectSelectedUser } from '../../features/user/userSlice';
 
 const UserDetailPage = () => {
+  console.log('user detail page');
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
+    console.log('mounted');
     dispatch(fetchUserByIdAsync(Number.parseInt(id)));
   }, [dispatch, id]);
 

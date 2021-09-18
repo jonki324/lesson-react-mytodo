@@ -50,7 +50,11 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserByIdAsync.fulfilled, (state, action) => {
-        state.selectedUser = action.payload;
+        const current = JSON.stringify(state.selectedUser);
+        const payload = JSON.stringify(action.payload);
+        if (current !== payload) {
+          state.selectedUser = action.payload;
+        }
       })
       .addCase(fetchUserListAsync.fulfilled, (state, action) => {
         const current = JSON.stringify(state.userList);

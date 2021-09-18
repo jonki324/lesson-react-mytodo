@@ -6,6 +6,7 @@ type Props = {
 };
 
 const UserDetail = ({ user }: Props) => {
+  console.log('user detail component');
   return (
     <>
       <div>ID: {user.id}</div>
