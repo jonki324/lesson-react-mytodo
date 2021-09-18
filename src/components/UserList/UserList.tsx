@@ -7,6 +7,7 @@ type Props = {
 };
 
 const UserList = ({ userList }: Props) => {
+  console.log('user list component');
   return (
     <ul>
       {userList.map((user) => (

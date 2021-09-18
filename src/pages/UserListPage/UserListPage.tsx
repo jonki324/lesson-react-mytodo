@@ -5,11 +5,13 @@ import UserList from '../../components/UserList/UserList';
 import { fetchUserListAsync, selectUserList } from '../../features/user/userSlice';
 
 const UserListPage = () => {
+  console.log('user list page');
   const dispatch = useAppDispatch();
 
   const userList = useAppSelector(selectUserList);
 
   useEffect(() => {
+    console.log('page mounted');
     dispatch(fetchUserListAsync());
   }, [dispatch]);
 

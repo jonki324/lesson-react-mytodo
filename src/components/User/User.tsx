@@ -7,6 +7,7 @@ type Props = {
 };
 
 const User = ({ user }: Props) => {
+  console.log(`user component user id ${user.id}`);
   return (
     <li>
       <Link to={`/users/${user.id}`}>

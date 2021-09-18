@@ -53,7 +53,11 @@ export const userSlice = createSlice({
         state.selectedUser = action.payload;
       })
       .addCase(fetchUserListAsync.fulfilled, (state, action) => {
-        state.userList = action.payload;
+        const current = JSON.stringify(state.userList);
+        const payload = JSON.stringify(action.payload);
+        if (current !== payload) {
+          state.userList = action.payload;
+        }
       })
       .addCase(isAuthenticatedAsync.fulfilled, (state, action) => {
         state.isAuthenticated = true;
