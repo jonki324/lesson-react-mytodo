@@ -3,6 +3,7 @@ import Layout from '../../components/Layout/Layout';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
 const LoginPage = () => {
+  console.log('login page');
   return (
     <Layout>
       <h2>Login Page</h2>

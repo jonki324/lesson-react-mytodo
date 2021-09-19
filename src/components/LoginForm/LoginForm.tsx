@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { isAuthenticatedAsync, selectIsAuthenticated } from '../../features/user/userSlice';
 
 const LoginForm = () => {
+  console.log('login form component');
   const dispatch = useAppDispatch();
 
   const location = useLocation<{ from: string | undefined }>().state ?? undefined;
