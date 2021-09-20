@@ -11,6 +11,7 @@ import AuthenticatedGuard from './components/AuthenticatedGuard/AuthenticatedGua
 import Logout from './components/Logout/Logout';
 
 const App = () => {
+  console.log('app component');
   return (
     <BrowserRouter>
       <Switch>

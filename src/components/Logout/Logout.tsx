@@ -6,6 +6,7 @@ import { setIsAuthenticated, setLoginUser } from '../../features/user/userSlice'
 import { UserModel } from '../../types/user';
 
 const Logout = () => {
+  console.log('logout component');
   const dispatch = useAppDispatch();
   destoryToken();
   dispatch(setIsAuthenticated(false));

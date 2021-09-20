@@ -9,6 +9,7 @@ type Props = {
 };
 
 const AuthenticatedGuard = ({ children }: Props) => {
+  console.log('authenticated guard component');
   const dispatch = useAppDispatch();
   const location = useLocation();
   const from = location?.pathname === '/logout' ? undefined : location?.pathname;

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 type Props = { children: React.ReactNode };
 
 const Layout = ({ children }: Props) => {
+  console.log('layout component');
   return (
     <>
       <header>
