@@ -12,11 +12,13 @@ import {
 } from '../../features/todo/todoSlice';
 
 const TodoPage = () => {
+  console.log('todo page');
   const dispatch = useAppDispatch();
   const todoFilter = useAppSelector(selectTodoFilter);
   const todoList = useAppSelector(selectTodoList);
 
   useEffect(() => {
+    console.log('mounted');
     dispatch(fetchTodoListAsync());
   }, [dispatch]);
 

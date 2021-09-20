@@ -7,7 +7,8 @@ type Props = {
   filter: TodoFilterModel;
 };
 
-const TodoFilter = ({ filter }: Props) => {
+const TodoFilter = React.memo(({ filter }: Props) => {
+  console.log('todo fileter component');
   const dispatch = useAppDispatch();
 
   const handleChangeText = (e: React.FormEvent<HTMLInputElement>) => {
@@ -41,6 +42,6 @@ const TodoFilter = ({ filter }: Props) => {
       </div>
     </>
   );
-};
+});
 
 export default TodoFilter;

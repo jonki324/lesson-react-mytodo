@@ -73,7 +73,11 @@ export const todoSlice = createSlice({
         console.log('loading...');
       })
       .addCase(fetchTodoListAsync.fulfilled, (state, action) => {
-        state.todoList = action.payload;
+        const current = JSON.stringify(state.todoList);
+        const payload = JSON.stringify(action.payload);
+        if (current !== payload) {
+          state.todoList = action.payload;
+        }
       })
       .addCase(createTodoAsync.fulfilled, (state, action) => {
         state.todoList.push(action.payload);

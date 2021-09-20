@@ -12,6 +12,7 @@ type Props = {
 };
 
 const Todo = ({ todo }: Props) => {
+  console.log(`todo component ${todo.id}`);
   const dispatch = useAppDispatch();
 
   const checkboxId = `todo-${todo.id}`;
@@ -20,9 +21,9 @@ const Todo = ({ todo }: Props) => {
     dispatch(updateTodoAsync({ ...todo, isCompleted: !todo.isCompleted }));
   };
 
-  const handleClickDelete = () => {
-    dispatch(deleteTodoAsync(todo));
-    dispatch(fetchTodoListAsync());
+  const handleClickDelete = async () => {
+    await dispatch(deleteTodoAsync(todo));
+    await dispatch(fetchTodoListAsync());
   };
 
   return (

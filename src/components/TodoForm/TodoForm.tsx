@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { createTodoAsync } from '../../features/todo/todoSlice';
 
-const TodoForm = () => {
+const TodoForm = React.memo(() => {
+  console.log('todo form component');
   const dispatch = useAppDispatch();
 
   const [body, setBody] = useState('');
@@ -28,6 +29,6 @@ const TodoForm = () => {
       </button>
     </>
   );
-};
+});
 
 export default TodoForm;

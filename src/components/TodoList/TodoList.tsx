@@ -8,6 +8,7 @@ type Props = {
 };
 
 const TodoList = ({ todoList, filter }: Props) => {
+  console.log('todo list component');
   return (
     <>
       <div>TodoList</div>

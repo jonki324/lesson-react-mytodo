@@ -11,22 +11,29 @@ type Props = {
   todoList: TodoModel[];
 };
 
-const TodoSummary = ({ todoList }: Props) => {
+const TodoSummary = React.memo(({ todoList }: Props) => {
+  console.log('todo summary component');
   const dispatch = useAppDispatch();
 
-  const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const toggleStatusDisabled = todoList.length === 0;
+  const toggleStatusChecked = todoList.every((todo) => todo.isCompleted) && todoList.length > 0;
+  const completedTodoCount = todoList.filter((todo) => todo.isCompleted).length;
+  const allTodoCount = todoList.length;
+  const deleteAllBtnDisabled = todoList.every((todo) => !todo.isCompleted);
+
+  const handleChangeCheckbox = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const isCompleted = e.currentTarget.checked;
     const updateTodoList = todoList
       .filter((todo) => todo.isCompleted !== isCompleted)
       .map((todo) => ({ ...todo, isCompleted }));
-    dispatch(updateAllTodoAsync({ todoList: updateTodoList }));
-    dispatch(fetchTodoListAsync());
+    await dispatch(updateAllTodoAsync({ todoList: updateTodoList }));
+    await dispatch(fetchTodoListAsync());
   };
 
-  const handleClickDeleteAll = () => {
+  const handleClickDeleteAll = async () => {
     const completedTodoList = todoList.filter((todo) => todo.isCompleted);
-    dispatch(deleteAllTodoAsync({ todoList: completedTodoList }));
-    dispatch(fetchTodoListAsync());
+    await dispatch(deleteAllTodoAsync({ todoList: completedTodoList }));
+    await dispatch(fetchTodoListAsync());
   };
 
   return (
@@ -36,22 +43,18 @@ const TodoSummary = ({ todoList }: Props) => {
           type="checkbox"
           id="toggleStatus"
           onChange={handleChangeCheckbox}
-          disabled={todoList.length === 0}
-          checked={todoList.every((todo) => todo.isCompleted) && todoList.length > 0}
+          disabled={toggleStatusDisabled}
+          checked={toggleStatusChecked}
         />
         <label htmlFor="toggleStatus">Toggle Completed Status To All Todo</label>
       </div>
-      <span>Completed Todo Count: {todoList.filter((todo) => todo.isCompleted).length}</span>
-      <span>, All Todo Count: {todoList.length}</span>
-      <button
-        type="button"
-        onClick={handleClickDeleteAll}
-        disabled={todoList.every((todo) => !todo.isCompleted)}
-      >
+      <span>Completed Todo Count: {completedTodoCount}</span>
+      <span>, All Todo Count: {allTodoCount}</span>
+      <button type="button" onClick={handleClickDeleteAll} disabled={deleteAllBtnDisabled}>
         Delete All Completed Todo
       </button>
     </>
   );
-};
+});
 
 export default TodoSummary;
