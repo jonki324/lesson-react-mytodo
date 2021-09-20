@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { TodoModel, TodoFilterModel } from '../../types/todo';
+import { deepEqualSelector } from '../core/deepEqualSelector';
 import {
   fetchTodoList,
   createTodo,
@@ -73,11 +74,7 @@ export const todoSlice = createSlice({
         console.log('loading...');
       })
       .addCase(fetchTodoListAsync.fulfilled, (state, action) => {
-        const current = JSON.stringify(state.todoList);
-        const payload = JSON.stringify(action.payload);
-        if (current !== payload) {
-          state.todoList = action.payload;
-        }
+        state.todoList = action.payload;
       })
       .addCase(createTodoAsync.fulfilled, (state, action) => {
         state.todoList.push(action.payload);
@@ -92,7 +89,7 @@ export const todoSlice = createSlice({
 
 export const { filterByTodo } = todoSlice.actions;
 
-export const selectTodoList = (state: RootState) => state.todo.todoList;
+export const selectTodoList = deepEqualSelector((state: RootState) => state.todo.todoList);
 export const selectTodoFilter = (state: RootState) => state.todo.filter;
 
 export default todoSlice.reducer;

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
 import { UserModel } from '../../types/user';
+import { deepEqualSelector } from '../core/deepEqualSelector';
 import { saveToken } from '../core/jwtService';
 import { fetchUserById, fetchUserList, isAuthenticated } from './userAPI';
 
@@ -50,18 +51,10 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserByIdAsync.fulfilled, (state, action) => {
-        const current = JSON.stringify(state.selectedUser);
-        const payload = JSON.stringify(action.payload);
-        if (current !== payload) {
-          state.selectedUser = action.payload;
-        }
+        state.selectedUser = action.payload;
       })
       .addCase(fetchUserListAsync.fulfilled, (state, action) => {
-        const current = JSON.stringify(state.userList);
-        const payload = JSON.stringify(action.payload);
-        if (current !== payload) {
-          state.userList = action.payload;
-        }
+        state.userList = action.payload;
       })
       .addCase(isAuthenticatedAsync.fulfilled, (state, action) => {
         state.isAuthenticated = true;
@@ -73,8 +66,8 @@ export const userSlice = createSlice({
 
 export const { setIsAuthenticated, setLoginUser } = userSlice.actions;
 
-export const selectUserList = (state: RootState) => state.user.userList;
-export const selectSelectedUser = (state: RootState) => state.user.selectedUser;
+export const selectUserList = deepEqualSelector((state: RootState) => state.user.userList);
+export const selectSelectedUser = deepEqualSelector((state: RootState) => state.user.selectedUser);
 export const selectIsAuthenticated = (state: RootState) => state.user.isAuthenticated;
 export const selectLoginUser = (state: RootState) => state.user.loginUser;
 
