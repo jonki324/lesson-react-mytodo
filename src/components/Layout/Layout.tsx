@@ -81,7 +81,9 @@ const Layout = ({ children }: Props) => {
         </Box>
       </header>
       <main>
-        <Container maxWidth="xl">{children}</Container>
+        <Container maxWidth="xl" sx={{ height: '100%' }}>
+          {children}
+        </Container>
       </main>
     </>
   );

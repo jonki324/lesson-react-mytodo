@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { isAuthenticatedAsync, selectIsAuthenticated } from '../../features/user/userSlice';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const LoginForm = () => {
   console.log('login form component');
@@ -11,6 +14,8 @@ const LoginForm = () => {
 
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+
+  const disabled = loginId.trim() === '' || password.trim() === '';
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   if (isAuthenticated) {
@@ -22,33 +27,34 @@ const LoginForm = () => {
   };
 
   return (
-    <>
-      <div>
-        <label htmlFor="loginId">LoginID: </label>
-        <input
-          type="text"
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <TextField
           id="loginId"
+          label="Login ID"
+          variant="outlined"
+          fullWidth
           value={loginId}
           onChange={(e) => setLoginId(e.currentTarget.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="password">Password: </label>
-        <input
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
           type="password"
           id="password"
+          label="Password"
+          variant="outlined"
+          fullWidth
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-      </div>
-      <button
-        type="button"
-        onClick={handleClickLogin}
-        disabled={loginId.trim() === '' || password.trim() === ''}
-      >
-        LOGIN
-      </button>
-    </>
+      </Grid>
+      <Grid item xs={12}>
+        <Button variant="contained" onClick={handleClickLogin} disabled={disabled} fullWidth>
+          LOGIN
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 
