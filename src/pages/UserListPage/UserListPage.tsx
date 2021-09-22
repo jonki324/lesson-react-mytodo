@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Layout from '../../components/Layout/Layout';
 import UserList from '../../components/UserList/UserList';
 import { fetchUserListAsync, selectUserList } from '../../features/user/userSlice';
+import { Grid } from '@material-ui/core';
 
 const UserListPage = () => {
   console.log('user list page');
@@ -17,8 +18,14 @@ const UserListPage = () => {
 
   return (
     <Layout>
-      <h2>User List Page</h2>
-      <UserList userList={userList} />
+      <Grid container spacing={3}>
+        <Grid item xs={12} textAlign="center">
+          <h2>User List Page</h2>
+        </Grid>
+        <Grid item xs={12}>
+          <UserList userList={userList} />
+        </Grid>
+      </Grid>
     </Layout>
   );
 };
