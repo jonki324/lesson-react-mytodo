@@ -6,6 +6,7 @@ import {
   updateTodoAsync,
 } from '../../features/todo/todoSlice';
 import { TodoModel } from '../../types/todo';
+import { Button, FormGroup, FormControlLabel, Checkbox, Box, Chip } from '@material-ui/core';
 
 type Props = {
   todo: TodoModel;
@@ -14,8 +15,6 @@ type Props = {
 const Todo = ({ todo }: Props) => {
   console.log(`todo component ${todo.id}`);
   const dispatch = useAppDispatch();
-
-  const checkboxId = `todo-${todo.id}`;
 
   const handleChangeCheckbox = () => {
     dispatch(updateTodoAsync({ ...todo, isCompleted: !todo.isCompleted }));
@@ -26,20 +25,30 @@ const Todo = ({ todo }: Props) => {
     await dispatch(fetchTodoListAsync());
   };
 
+  const labelValue = () => {
+    return todo.isCompleted ? (
+      <>
+        {todo.body}
+        <Chip label="Completed !" sx={{ ml: 1 }} color="success" />
+      </>
+    ) : (
+      <>{todo.body}</>
+    );
+  };
+
   return (
     <>
-      <li>
-        <input
-          type="checkbox"
-          id={checkboxId}
-          checked={todo.isCompleted}
-          onChange={handleChangeCheckbox}
-        />
-        <label htmlFor={checkboxId}>{todo.body}</label>
-        <button type="button" onClick={handleClickDelete}>
+      <Box sx={{ display: 'flex', mb: 2 }}>
+        <FormGroup sx={{ flexGrow: 1 }}>
+          <FormControlLabel
+            control={<Checkbox checked={todo.isCompleted} onChange={handleChangeCheckbox} />}
+            label={labelValue()}
+          />
+        </FormGroup>
+        <Button type="button" variant="outlined" color="error" onClick={handleClickDelete}>
           Delete
-        </button>
-      </li>
+        </Button>
+      </Box>
     </>
   );
 };

@@ -6,6 +6,16 @@ import {
   updateAllTodoAsync,
 } from '../../features/todo/todoSlice';
 import { TodoModel } from '../../types/todo';
+import {
+  Button,
+  Checkbox,
+  Chip,
+  Divider,
+  FormGroup,
+  FormControlLabel,
+  Typography,
+  Box,
+} from '@material-ui/core';
 
 type Props = {
   todoList: TodoModel[];
@@ -38,21 +48,36 @@ const TodoSummary = React.memo(({ todoList }: Props) => {
 
   return (
     <>
-      <div>
-        <input
-          type="checkbox"
-          id="toggleStatus"
-          onChange={handleChangeCheckbox}
-          disabled={toggleStatusDisabled}
-          checked={toggleStatusChecked}
+      <FormGroup sx={{ mt: 1 }}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={toggleStatusChecked}
+              disabled={toggleStatusDisabled}
+              onChange={handleChangeCheckbox}
+            />
+          }
+          label="Toggle Completed Status To All Todo"
         />
-        <label htmlFor="toggleStatus">Toggle Completed Status To All Todo</label>
-      </div>
-      <span>Completed Todo Count: {completedTodoCount}</span>
-      <span>, All Todo Count: {allTodoCount}</span>
-      <button type="button" onClick={handleClickDeleteAll} disabled={deleteAllBtnDisabled}>
-        Delete All Completed Todo
-      </button>
+      </FormGroup>
+      <Divider sx={{ mt: 2, mb: 2 }} />
+      <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
+          <Typography>Completed Todo Count : </Typography>
+          <Chip label={completedTodoCount} color="success" sx={{ ml: 1 }} />
+          <Typography sx={{ ml: 1 }}>All Todo Count : </Typography>
+          <Chip label={allTodoCount} color="primary" sx={{ ml: 1 }} />
+        </Box>
+        <Button
+          type="button"
+          onClick={handleClickDeleteAll}
+          disabled={deleteAllBtnDisabled}
+          variant="contained"
+          color="error"
+        >
+          Delete All Completed Todo
+        </Button>
+      </Box>
     </>
   );
 });

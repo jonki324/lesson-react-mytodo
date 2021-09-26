@@ -10,6 +10,7 @@ import {
   fetchTodoListAsync,
   selectTodoList,
 } from '../../features/todo/todoSlice';
+import { Grid } from '@material-ui/core';
 
 const TodoPage = () => {
   console.log('todo page');
@@ -24,11 +25,17 @@ const TodoPage = () => {
 
   return (
     <Layout>
-      <h2>Todo List Page</h2>
-      <TodoFilter filter={todoFilter} />
-      <TodoList todoList={todoList} filter={todoFilter} />
-      <TodoForm />
-      <TodoSummary todoList={todoList} />
+      <Grid container spacing={3} justifyContent="center">
+        <Grid item xs={12} textAlign="center">
+          <h2>Todo List Page</h2>
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <TodoFilter filter={todoFilter} />
+          <TodoList todoList={todoList} filter={todoFilter} />
+          <TodoForm />
+          <TodoSummary todoList={todoList} />
+        </Grid>
+      </Grid>
     </Layout>
   );
 };
