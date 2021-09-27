@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { isAuthenticatedAsync, selectIsAuthenticated } from '../../features/user/userSlice';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { Grid, Button, TextField } from '@material-ui/core';
 
 const LoginForm = () => {
   console.log('login form component');
@@ -18,15 +16,14 @@ const LoginForm = () => {
   const disabled = loginId.trim() === '' || password.trim() === '';
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  if (isAuthenticated) {
-    return <Redirect to={location?.from ?? '/todos'} />;
-  }
 
   const handleClickLogin = () => {
     dispatch(isAuthenticatedAsync({ loginId, password }));
   };
 
-  return (
+  return isAuthenticated ? (
+    <Redirect to={location?.from ?? '/todos'} />
+  ) : (
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <TextField

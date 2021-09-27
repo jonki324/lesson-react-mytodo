@@ -1,10 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
+import { Card, CardHeader, CardContent, Grid } from '@material-ui/core';
 
 const LoginPage = () => {
   console.log('login page');
